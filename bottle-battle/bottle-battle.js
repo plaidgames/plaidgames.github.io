@@ -1,13 +1,23 @@
 const bottle = document.getElementById('bottle');
 const spinButton = document.getElementById('spinButton');
-const greg = document.getElementById('greg');
-const priya = document.getElementById('priya');
+
+const playerAnchors = document.querySelectorAll('.player-name-anchor');
+const greg = playerAnchors[0];
+const priya = playerAnchors[1];
 
 let angle = 0;
 
 spinButton.addEventListener('click', () => {
-	greg.firstChild.style.animation = 'none';
-	greg.firstChild.style.animation = '0.5s ease-out forwards grow, 1s pulse 0s infinite';
+	//greg.firstElementChild.style.animation = 'none';
+	//greg.firstElementChild.style.animation = ';
+
+	var classList = greg.firstElementChild.classList;
+	if (!classList.contains('won')) {
+		classList.add('won');
+	} else {
+		classList.remove('won');
+	}
+
 	/*
 		greg.style.animation = 'none';
 		priya.style.animation = 'none';
