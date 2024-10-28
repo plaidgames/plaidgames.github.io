@@ -1,0 +1,104 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	background: linear-gradient(to bottom, #ffcccc 50%, #ccffcc 50%);
+}
+
+#bottle {
+	width: 150px;
+	transition: transform 5s cubic-bezier(0.10, 0, 0.10, 0.98);
+}
+
+#spinButton {
+	margin-top: 20px;
+}
+
+/*
+#board {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-direction: column;
+	
+	//text-align: center;
+}
+*/
+
+#greg {
+	position: absolute;
+	left: 50%;
+	top: 25%;
+	transform: translate(-50%, -50%);
+}
+
+#greg div {
+	
+	field-sizing: content;
+	text-align: center;
+	padding: 2rem;
+	overflow: visible;
+}
+
+#priya {
+	position: absolute;
+	left: 50%;
+	top: 75%;
+}
+
+#spinButton {
+	position: absolute;
+	bottom: 1em;
+	left: 50%;
+}
+
+#greg {
+	border: none;
+	
+}
+
+#greg,
+#priya {
+	margin-left: auto;
+	margin-right: auto;
+	width: fit-content;
+
+	background: transparent;
+	font-size: 48px;
+	color: #ffffff;
+	-webkit-text-stroke: 0.5px black;
+	font-weight: bold;
+	text-shadow: #000000 0px 0px 0px, #000000 0 0 1px, #000000 0 0 2px;
+
+	transition: transform 0.5s;
+	animation-composition: accumulate;
+}
+
+@keyframes grow {
+	0% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(5);
+	}
+}
+
+@keyframes pulse {
+
+	0%,
+	100% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(2);
+	}
+}
