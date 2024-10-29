@@ -27,6 +27,11 @@ function sampleNextAngle(nextWinnerIdx) {
 		if (angleToWinnerIdx(nextAngle) != nextWinnerIdx) {
 			continue;
 		}
+		
+		const margin = 90 - Math.abs(nextAngle % 180 - 90);
+		if (margin < 3) {
+			continue;
+		}
 
 		return nextAngle;
 	}	
