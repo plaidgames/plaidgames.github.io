@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
 body {
 	height: 100vh;
 	width: 100vw;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background: linear-gradient(to bottom, #b96161 50%, #4c63a7 50%);
+	background: linear-gradient(to bottom, #b96161 49.5%, #d0d0d0 49.5%, #f8f8f8, #f8f8f8 50.5%, #4c63a7 50.5%);
 	box-shadow: inset 0em 0em 100em 0px rgb(0 0 0 / 50%);
+	font-family: "Luckiest Guy";
 }
 
 .bottle-anchor {
@@ -18,8 +21,7 @@ body {
 }
 
 #bottle {
-	height: 600px;
-	transform: rotate(270deg);
+	width: 600px;
 	transition: transform 6s cubic-bezier(0.10, 0, 0.10, 0.98);
 }
 
@@ -35,11 +37,9 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 
-	background: transparent;
 	font-size: 48px;
 	color: #ffffff;
 	-webkit-text-stroke: 0.5px black;
-	font-weight: bold;
 	text-shadow: #000000 0px 0px 0px, #000000 0 0 1px, #000000 0 0 2px;
 }
 
@@ -68,6 +68,10 @@ body {
 
 .player-name.won {
 	animation: 0.25s ease-in forwards grow, 1s ease-in-out pulse infinite, 3s ease-in-out shake infinite;
+}
+
+.player-name.init {
+	animation: none !important;
 }
 
 @keyframes ungrow {
@@ -116,14 +120,4 @@ body {
 	25% {
 		transform: rotate(0deg);
 	}
-}
-
-#spinButton {
-	margin-top: 20px;
-}
-
-#spinButton {
-	position: absolute;
-	bottom: 1em;
-	left: 50%;
 }
