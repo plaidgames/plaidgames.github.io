@@ -7,17 +7,31 @@ function angleToWinnerIdx(angle) {
 	return angle % 360 <= 180 ? 0 : 1;
 }
 
+class WinnerIdxSampler {
+	#decay;
+	#mean = 0.5;
+
+	constructor(decay) {
+		this.#decay = decay;
+	}
+
+	addToHistory(winnerIdx) {
+		this.#mean = this.#decay * winnerIdx + (1 - this.#decay) * this.#mean;
+	}
+
+	sample() {
+		return Math.random() < this.#mean ? 0 : 1;
+	}
+}
+const winnerIdxSampler = new WinnerIdxSampler(1/3);
+
 bottle.addEventListener('transitionend', () => {
 	const winnerIdx = angleToWinnerIdx(angle);
+	winnerIdxSampler.addToHistory(winnerIdx);
 	const classList = playerNameElements[winnerIdx].classList;
 	classList.add('won');
 	classList.remove('init');
 });
-
-function sampleNextWinnerIdx() {
-	let nextWinnerIdx = Math.random() > 0.5 ? 0 : 1;
-	return nextWinnerIdx;
-}
 
 function sampleNextAngle(nextWinnerIdx) {
 	while (true) {
@@ -46,7 +60,7 @@ function spin(nextWinnerIdx) {
 }
 
 function randomSpin() {
-	let nextWinnerIdx = sampleNextWinnerIdx();
+	let nextWinnerIdx = winnerIdxSampler.sample();
 	spin(nextWinnerIdx);
 }
 
