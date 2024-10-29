@@ -15,7 +15,7 @@ function randomSpin() {
 	playerNameElements[1].classList.remove('won');
 
 	const randomDegree = Math.random() * 360 * 2;
-	angle += 4 * 360 + randomDegree;
+	angle += 6 * 360 + randomDegree;
 	bottle.style.transform = `rotate(${angle}deg)`;
 }
 
