@@ -3,20 +3,46 @@ const playerNameElements = document.querySelectorAll('.player-name');
 
 let angle = 0;
 
+function angleToWinnerIdx(angle) {
+	return angle % 360 <= 180 ? 0 : 1;
+}
+
 bottle.addEventListener('transitionend', () => {
-	const winnerIdx = angle % 360 <= 180 ? 0 : 1;
+	const winnerIdx = angleToWinnerIdx(angle);
 	const classList = playerNameElements[winnerIdx].classList;
 	classList.add('won');
 	classList.remove('init');
 });
 
-function randomSpin() {
+function sampleNextWinnerIdx() {
+	let nextWinnerIdx = Math.random() > 0.5 ? 0 : 1;
+	return nextWinnerIdx;
+}
+
+function sampleNextAngle(nextWinnerIdx) {
+	while (true) {
+		const randomDegree = Math.random() * 360 * 2;
+		const nextAngle = angle + 6 * 360 + randomDegree;
+
+		if (angleToWinnerIdx(nextAngle) != nextWinnerIdx) {
+			continue;
+		}
+
+		return nextAngle;
+	}	
+}
+
+function spin(nextWinnerIdx) {
+	angle = sampleNextAngle(nextWinnerIdx);
+	bottle.style.transform = `rotate(${angle}deg)`;
+
 	playerNameElements[0].classList.remove('won');
 	playerNameElements[1].classList.remove('won');
+}
 
-	const randomDegree = Math.random() * 360 * 2;
-	angle += 6 * 360 + randomDegree;
-	bottle.style.transform = `rotate(${angle}deg)`;
+function randomSpin() {
+	let nextWinnerIdx = sampleNextWinnerIdx();
+	spin(nextWinnerIdx);
 }
 
 function debugToggleWin() {
@@ -44,9 +70,9 @@ document.body.addEventListener('keydown', (event) => {
 	} else if (event.code == 'Digit1' && debug) {
 		debugToggleWin();
 	} else if (event.code == 'KeyA' && debug) {
-		randomSpin();
+		spin(0);
 	} else if (event.code == 'KeyD' && debug) {
-		randomSpin();
+		spin(1);
 	} else if (event.code.startsWith('Key')) {
 		debug = false;
 	}
