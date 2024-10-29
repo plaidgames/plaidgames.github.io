@@ -1,14 +1,25 @@
-html {
-	height: 100%;
-}
-
 body {
-	height: 100%;
-	background: linear-gradient(to bottom, #ffcccc 50%, #ccffcc 50%);
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: linear-gradient(to bottom, #b96161 50%, #4c63a7 50%);
+	box-shadow: inset 0em 0em 100em 0px rgb(0 0 0 / 50%);
 }
 
-#bottle {
-	width: 150px;
+.bottle-anchor {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	filter: drop-shadow(10px 5px 10px #000000);
+}
+
+.bottle {
+	height: 600px;
+	transform: rotate(40deg);
 	transition: transform 5s cubic-bezier(0.10, 0, 0.10, 0.98);
 }
 
@@ -26,24 +37,39 @@ body {
 }
 
 .player-name-anchor:nth-of-type(1) {
-	top: 20%;
+	top: 15%;
 }
 
 .player-name-anchor:nth-of-type(2) {
-	top: 80%;
+	top: 85%;
 }
 
 .player-name {
 	field-sizing: content;
 	text-align: center;
-	padding: 2rem;
+	padding: 0.5rem 1.5rem;
 	overflow: visible;
 
+	transition: transform 1s;
 	animation-composition: accumulate;
+	animation: 0.1s ease-in forwards ungrow;
+}
+
+.player-name:focus {
+	background: rgba(0, 0, 0, 0.1);
 }
 
 .player-name.won {
-	animation: 0.25s ease-in forwards grow, 1s pulse infinite;
+	animation: 0.25s ease-in forwards grow, 1s ease-in-out pulse infinite, 3s ease-in-out shake infinite;
+}
+
+@keyframes ungrow {
+	0% {
+		transform: scale(3);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
 
 @keyframes grow {
@@ -61,6 +87,27 @@ body {
 
 	50% {
 		transform: scale(2);
+	}
+}
+
+@keyframes shake {
+	0% {
+		transform: rotate(0deg);
+	}
+	5% {
+		transform: rotate(-5deg);
+	}
+	10% {
+		transform: rotate(+5deg);
+	}
+	15% {
+		transform: rotate(-5deg);
+	}
+	20% {
+		transform: rotate(+5deg);
+	}
+	25% {
+		transform: rotate(0deg);
 	}
 }
 
