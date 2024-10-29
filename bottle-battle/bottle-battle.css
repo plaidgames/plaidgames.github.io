@@ -17,10 +17,17 @@ body {
 	filter: drop-shadow(10px 5px 10px #000000);
 }
 
-.bottle {
+#bottle {
 	height: 600px;
-	transform: rotate(40deg);
-	transition: transform 5s cubic-bezier(0.10, 0, 0.10, 0.98);
+	transform: rotate(270deg);
+	transition: transform 6s cubic-bezier(0.10, 0, 0.10, 0.98);
+}
+
+#spin-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .player-name-anchor {

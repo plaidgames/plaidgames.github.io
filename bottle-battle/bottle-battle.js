@@ -1,45 +1,29 @@
 const bottle = document.getElementById('bottle');
-const spinButton = document.getElementById('spinButton');
+const spinButton = document.getElementById('spin-button');
 
 const playerAnchors = document.querySelectorAll('.player-name-anchor');
-const greg = playerAnchors[0];
-const priya = playerAnchors[1];
 
 let angle = 0;
 
-spinButton.addEventListener('click', () => {
-	//greg.firstElementChild.style.animation = 'none';
-	//greg.firstElementChild.style.animation = ';
-
+function toggle() {
 	var classList = greg.firstElementChild.classList;
 	if (!classList.contains('won')) {
 		classList.add('won');
 	} else {
 		classList.remove('won');
 	}
+}
 
-	/*
-		greg.style.animation = 'none';
-		priya.style.animation = 'none';
-		greg.style.transform = 'translateY(-50%) scale(1)';
-		priya.style.transform = 'translateY(-50%) scale(1)';
-		
-		const randomDegree = Math.floor(Math.random() * 360 * 2);
-		angle += 3 * 360 + randomDegree;
-		bottle.style.transform = `rotate(${angle}deg)`;
+spinButton.addEventListener('click', () => {
+	playerAnchors[0].firstElementChild.classList.remove('won');
+	playerAnchors[1].firstElementChild.classList.remove('won');
 
-		setTimeout(() => {
-			if (randomDegree % 360 <= 180) {
-				greg.style.transform = 'translateY(-50%) scale(5)';
-				setTimeout(() => {
-					greg.style.animation = 'pulse 1s infinite';
-				}, 500); // Wait for initial transform to complete before pulsing
-			} else {
-				priya.style.transform = 'translateY(-50%) scale(5)';
-				setTimeout(() => {
-					priya.style.animation = 'pulse 1s infinite';
-				}, 500); // Wait for initial transform to complete before pulsing
-			}
-		}, 2000);
-	*/
+	const randomDegree = Math.floor(Math.random() * 360 * 2);
+	angle += 4 * 360 + randomDegree;
+	bottle.style.transform = `rotate(${angle}deg)`;
+});
+
+bottle.addEventListener('transitionend', () => {
+	const winnerIdx = (angle + 90) % 360 <= 180 ? 0 : 1;
+	playerAnchors[winnerIdx].firstElementChild.classList.add('won');
 });
